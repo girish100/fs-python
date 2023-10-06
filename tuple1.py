@@ -1,0 +1,15 @@
+t1 = 12,34,89,90,98,89,'hello','max',129.09,100+90j
+print("tuple :",t1)
+print("indexing the tuple : ")
+for i in t1:
+    print(i)
+print()
+print("slicing the tuple")
+print(t1[0:4])
+print('empty tuple in -ve direction :',t1[-1:-5:])
+print('empty tuple in +ve direction :',t1[:0])
+print(t1[::-1])
+print(t1[4:6])
+print(t1[0:6:2])
+print()
+print("End of code")
