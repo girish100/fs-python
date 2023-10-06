@@ -1,2 +1,2 @@
 # fs-python
-Python  assignments
+Python  programs
