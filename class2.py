@@ -25,12 +25,12 @@ class details():
                 desig = input("Designation: ")
                 sal = input("Salary: ")
                 print()
-                self.id.append('-'if id == '' else id)
-                self.name.append('-'if name == '' else name)
-                self.dob.append('-'if dob == '' else dob)
-                self.desig.append('-'if desig == '' else desig)
-                self.sal.append('-'if sal == '' else sal)
-                self.comp.append('-'if comp == '' else comp)
+                self.id.append('-'if id == '-' else id)
+                self.name.append('-'if name == '-' else name)
+                self.dob.append('-'if dob == '-' else dob)
+                self.desig.append('-'if desig == '-' else desig)
+                self.sal.append('-'if sal == '-' else sal)
+                self.comp.append('-'if comp == '-' else comp)
     def c_p_data(self,n,type1): #instance method
         if type1 == 'cust':
             for i in range(n):
@@ -39,9 +39,9 @@ class details():
                 c_id = input("Customer Id: ")
                 c_dob = input("Customer Date of Birth: ")
                 print()
-                self.c_id.append('-'if c_id == '' else c_id)
-                self.c_name.append('-'if c_name == '' else c_name)
-                self.c_dob.append('-'if c_dob == '' else c_dob)
+                self.c_id.append('-'if c_id == '-' else c_id)
+                self.c_name.append('-'if c_name == '-' else c_name)
+                self.c_dob.append('-'if c_dob == '-' else c_dob)
         elif type1 =='pro':
             for i in range(n):
                 print(f"{i+1}.Product ")
@@ -50,42 +50,42 @@ class details():
                 price = input("Price: ")
                 p_comp = input("Product company: ")
                 print()
-                self.pid.append('-'if pid == '' else pid)
-                self.pname.append('-'if pname == '' else pname)
-                self.price.append('-' if price=='' else price)
-                self.p_comp.append('-' if p_comp == '' else p_comp)
-    def d_print(self,n,type1): #instance method
+                self.pid.append('-'if pid == '-' else pid)
+                self.pname.append('-'if pname == '-' else pname)
+                self.price.append('-' if price=='-' else price)
+                self.p_comp.append('-' if p_comp == '-' else p_comp)
+    def d_print(self,type1): #instance method
         if type1 == 'emp':
             print("=====Employee Details=====")
-            for i in range(n):
+            for i in range(len(self.id)):
                 print("{}. Company:{}".format(i+1,self.comp[i]))
                 print("Id: {}\nName: {}\nDOB: {}".format(self.id[i],self.name[i],self.dob[i]))
                 print("Designation: {}\nSalary:{}\n".format(self.desig[i],self.sal[i]))
         elif type1 == 'cust':
             print("=====Customer Details=====")
-            for i in range(n):
-                print(f'{i+1}. Customer name: {self.c_name[i]} \nId: {self.c_id[i]}\n DOB: {self.c_dob[i]}/n')
+            for i in range(len(self.c_id)):
+                print(f'{i+1}. Customer name: {self.c_name[i]} \nId: {self.c_id[i]}\nDOB: {self.c_dob[i]}\n')
         elif type1 == 'pro':
             print("=====Product Details=====")
-            for i in range(n):
-                print(f'{i+1}. Company: {self.p_comp[i]}\nProduct name: {self.pname[i]} \nId: {self.pid[i]}\n Price: {self.price[i]}\n ')
+            for i in range(len(self.pid)):
+                print(f'{i+1}. Company: {self.p_comp[i]}\nProduct name: {self.pname[i]}\nId: {self.pid[i]}\n Price: {self.price[i]}\n ')
     def d_pandas(self,n,type1):
         if type1 == 'emp':
             print("=====Employee Details======")
             self.emp_pd = pd.DataFrame(columns=['ID','Employee Name','DOB','Company','Designation','Salary'])
-            for i in range(n):  
+            for i in range(len(self.id)):  
                 self.emp_pd.loc[i]=[self.id[i],self.name[i],self.dob[i],self.comp[i],self.desig[i],self.sal[i]]
             print(self.emp_pd)
         elif type1 == 'cust':
             print("=====Customer Details=====")
             self.cust_pd = pd.DataFrame(columns=['Customer Id','Customer Name','DOB'])
-            for i in range(n):  
+            for i in range(len(self.c_id)):  
                 self.cust_pd.loc[i]=[self.c_id[i],self.c_name[i],self.c_dob[i]]
             print(self.cust_pd)
         elif type1 == 'pro':
             print("=====Product Details=====")
             self.pro_pd = pd.DataFrame(columns=['Company','Product ID','Product Name','Price'])
-            for i in range(n):  
+            for i in range(len(self.pid)):  
                     self.pro_pd.loc[i]=[self.p_comp[i],self.pid[i],self.pname[i],self.price[i]]
             print(self.pro_pd)
 #Main execution
@@ -106,32 +106,32 @@ number: '''))
         q = int(input("Enter number of records you want to input: "))
     if type1 == 1:
         t1.e_data_add(q)
-        t1.d_print(q,'emp')
+        t1.d_print('emp')
         e = True
     elif type1 == 2:
         t1.c_p_data(q,'cust')
-        t1.d_print(q,'cust')
+        t1.d_print('cust')
         c = True
     elif type1 == 3:
         t1.c_p_data(q,'pro')
-        t1.d_print(q,'pro')
+        t1.d_print('pro')
         p = True
     elif type1 == 4:
         if e == True or c == True or p == True:
             choice = input("Use pandas: y/n  : ").lower()
-            if choice == 'y' or choice == 'yes' and e == True :
-                t1.d_pandas(q,'emp')
-            if choice == 'y' or choice == 'yes' and c == True :
-                t1.d_pandas(q,'cust')
-            if choice == 'y' or choice == 'yes' and p == True :
-                t1.d_pandas(q,'pro')
+            if e == True and (choice == 'y' or choice == 'yes'): #or change the  condition to -->  if choice == 'y': if e == True: t1.d_pandas(emp)
+                t1.d_pandas('emp')
+            if c == True and (choice == 'y' or choice == 'yes'):
+                t1.d_pandas('cust')
+            if p == True and (choice == 'y' or choice == 'yes'):
+                t1.d_pandas('pro')
             else:
                 if e == True :
-                    t1.d_print(q,'emp')
+                    t1.d_print('emp')
                 if c == True:
-                    t1.d_print(q,'cust')
+                    t1.d_print('cust')
                 if p == True:
-                    t1.d_print(q,'pro')
+                    t1.d_print('pro')
         else:
             print("No Data record found")
     elif type1 == 5 :
